@@ -136,6 +136,11 @@
 				];
 				
 			$("#rndQuestion").click(rndQuestionClick);
+			
+			$('#myform').submit(function (evt) {
+				evt.preventDefault();
+//				window.history.back();
+			});
 		}
 		
 		function rndQuestionClick() {
@@ -151,13 +156,13 @@
 			hideCardPanels();
 			showNameNumberPanels();
 			
-			if ($("#rndQuestion")[0].value === "下一題") {
-				drawQuestion();			
-				$("#rndQuestion")[0].value = "開估";
+			if ($("#rndQuestion").text() === "下一題") {
+				drawQuestion();
+				$("#rndQuestion").html("開估");
 			}
 			else {
 				showAnswer();
-				$("#rndQuestion")[0].value = "下一題";
+				$("#rndQuestion").html("下一題");
 			}
 		}
 
@@ -180,13 +185,13 @@
 			hideNameNumberPanels();
 			showCardPanels();
 			
-			if ($("#rndQuestion")[0].value === "下一題") {
-				drawCardQuestion();			
-				$("#rndQuestion")[0].value = "開估";
+			if ($("#rndQuestion").text() === "下一題") {
+				drawCardQuestion();
+				$("#rndQuestion").html("開估");
 			}
 			else {
 				showCardAnswer();
-				$("#rndQuestion")[0].value = "下一題";
+				$("#rndQuestion").html("下一題");
 			}
 		}
 
@@ -282,11 +287,12 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-6"><h1>記憶練習</h1></div>
-		<div class="col-md-6"><a href="table.html">全表</a></div>
+		<div class="col-sm-6"><h1>記憶練習</h1></div>
+		<div class="col-sm-6"><a href="table.html">全表</a></div>
 	</div>
 	
-	<form>
+	<div class="col-md-6 col-sm-12 loginDiv">
+	<form id="myform">
 		<div class="form-group">
 			<label>範圍</label>
 			<input class="form-control" id="rangeMin" type="textbox" value="1"> - <input class="form-control" id="rangeMax" type="textbox" value="100">
@@ -310,17 +316,20 @@
 			</label>
 		</div>
 		
-		<div class="form-group">
+		<button id="rndQuestion" type="submit" class="btn btn-lg btn-block btn-primary">下一題</button>
+		
+		<!-- <div class="form-group">
 			<input id="rndQuestion" value="下一題" type="button"></div>
-		</div>
+		</div> -->
 	</form>
+	</div>
 	
 	<div class="row">
 
-		<div id="numPanel" class="questionPanel col-md-12">
+		<div id="numPanel" class="questionPanel col-sm-12">
 		</div>
 
-		<div id="namePanel" class="questionPanel col-md-12">
+		<div id="namePanel" class="questionPanel col-sm-12">
 		</div>
 
 	</div>
@@ -339,4 +348,5 @@
 
 
 </body>
+
 </html>
