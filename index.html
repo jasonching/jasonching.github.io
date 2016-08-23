@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=big5">
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	
+	<style>
+		 .questionPanel {
+			width:400px;
+			height:400px;
+			float: left;
+			text-align:center;
+			font-size:10em;
+		 }
+		 .cardQuestionPanel {
+			width:400px;
+			/*height:130px;*/
+			float: left;
+			text-align:center;
+			font-size:10em;
+			margin-left:400px;
+		 }
+	</style>
+	
+	
+	<script type="text/javascript">
+		$(init);
+		var global = {};
+		function init() {
+			global["numberMapping"] = [
+				{num:1, name:"衣"},
+				{num:2, name:"鵝"},
+				{num:3, name:"山"},
+				{num:4, name:"獅"},
+				{num:5, name:"舞"},
+				{num:6, name:"牛"},
+				{num:7, name:"漆"},
+				{num:8, name:"耙"},
+				{num:9, name:"狗"},
+				{num:10, name:"石", poker:"10D.svg"},
+				{num:11, name:"筷子", poker:"AD.svg"},
+				{num:12, name:"嬰兒", poker:"2D.svg"},
+				{num:13, name:"飲衫", poker:"3D.svg"},
+				{num:14, name:"日蝕", poker:"4D.svg"},
+				{num:15, name:"衣帽", poker:"5D.svg"},
+				{num:16, name:"日落", poker:"6D.svg"},
+				{num:17, name:"一叉", poker:"7D.svg"},
+				{num:18, name:"一巴", poker:"8D.svg"},
+				{num:19, name:"一舊", poker:"9D.svg"},
+				{num:20, name:"異形", poker:"10C.svg"},
+				{num:21, name:"現金", poker:"AC.svg"},
+				{num:22, name:"姨姨", poker:"2C.svg"},
+				{num:23, name:"魚生", poker:"3C.svg"},
+				{num:24, name:"耳屎", poker:"4C.svg"},
+				{num:25, name:"二胡", poker:"5C.svg"},
+				{num:26, name:"乳酪", poker:"6C.svg"},
+				{num:27, name:"耳塞", poker:"7C.svg"},
+				{num:28, name:"泥巴", poker:"8C.svg"},
+				{num:29, name:"熱狗", poker:"9C.svg"},
+				{num:30, name:"三菱", poker:"10H.svg"},
+				{num:31, name:"生日", poker:"AH.svg"},
+				{num:32, name:"生面", poker:"2H.svg"},
+				{num:33, name:"珊珊", poker:"3H.svg"},
+				{num:34, name:"三蛇", poker:"4H.svg"},
+				{num:35, name:"珊瑚", poker:"5H.svg"},
+				{num:36, name:"山路", poker:"6H.svg"},
+				{num:37, name:"生蝨", poker:"7H.svg"},
+				{num:38, name:"婦女節", poker:"8H.svg"},
+				{num:39, name:"針灸", poker:"9H.svg"},
+				{num:40, name:"死刑", poker:"10S.svg"},
+				{num:41, name:"詩人", poker:"AS.svg"},
+				{num:42, name:"西醫", poker:"2S.svg"},
+				{num:43, name:"洗衫", poker:"3S.svg"},
+				{num:44, name:"死屍", poker:"4S.svg"},
+				{num:45, name:"洗碗", poker:"5S.svg"},
+				{num:46, name:"細路", poker:"6S.svg"},
+				{num:47, name:"紙巾", poker:"7S.svg"},
+				{num:48, name:"世伯", poker:"8S.svg"},
+				{num:49, name:"死狗", poker:"9S.svg"},
+				{num:50, name:"門鈴"},
+				{num:51, name:"舞衣", poker:"JD.svg"},
+				{num:52, name:"午夜", poker:"QD.svg"},
+				{num:53, name:"舞扇", poker:"KD.svg"},
+				{num:54, name:"舞獅"},
+				{num:55, name:"郵輪"},
+				{num:56, name:"葫蘆"},
+				{num:57, name:"午餐"},
+				{num:58, name:"尾巴"},
+				{num:59, name:"污垢"},
+				{num:60, name:"碌齡"},
+				{num:61, name:"路燈", poker:"JC.svg"},
+				{num:62, name:"木耳", poker:"QC.svg"},
+				{num:63, name:"綠山", poker:"KC.svg"},
+				{num:64, name:"牧師"},
+				{num:65, name:"龍門"},
+				{num:66, name:"打邊爐"},
+				{num:67, name:"浴室"},
+				{num:68, name:"蘿蔔"},
+				{num:69, name:"狼狗"},
+				{num:70, name:"切梨"},
+				{num:71, name:"7-11", poker:"JH.svg"},
+				{num:72, name:"乞兒", poker:"QH.svg"},
+				{num:73, name:"織衫", poker:"KH.svg"},
+				{num:74, name:"叉燒"},
+				{num:75, name:"茶壼"},
+				{num:76, name:"出浴"},
+				{num:77, name:"塞車"},
+				{num:78, name:"箭靶"},
+				{num:79, name:"擦膠"},
+				{num:80, name:"百零牌筆"},
+				{num:81, name:"白骨", poker:"JS.svg"},
+				{num:82, name:"百葉簾", poker:"QS.svg"},
+				{num:83, name:"爬山", poker:"KS.svg"},
+				{num:84, name:"巴士"},
+				{num:85, name:"白狐"},
+				{num:86, name:"白鷤"},
+				{num:87, name:"泊車"},
+				{num:88, name:"拜拜"},
+				{num:89, name:"白酒"},
+				{num:90, name:"舊鈴"},
+				{num:91, name:"膠椅"},
+				{num:92, name:"球衣"},
+				{num:93, name:"狗衫"},
+				{num:94, name:"狗屎"},
+				{num:95, name:"酒壺"},
+				{num:96, name:"九龍"},
+				{num:97, name:"酒塞"},
+				{num:98, name:"酒吧"},
+				{num:99, name:"舅舅"},
+				{num:100, name:"雞蛋"}
+				];
+				
+			$("#rndQuestion").click(rndQuestionClick);
+		}
+		
+		function rndQuestionClick() {
+			if (isCardGameChecked()) {
+				playCardGame();
+			}
+			else {
+				playNumberGame();
+			}
+		}
+		
+		function playNumberGame() {
+			hideCardPanels();
+			showNameNumberPanels();
+			
+			if ($("#rndQuestion")[0].value === "下一題") {
+				drawQuestion();			
+				$("#rndQuestion")[0].value = "開估";
+			}
+			else {
+				showAnswer();
+				$("#rndQuestion")[0].value = "下一題";
+			}
+		}
+
+		function drawQuestion() {
+			var min = $("#rangeMin")[0].value;
+			var max = $("#rangeMax")[0].value;
+			
+			var rndQuestion = Math.floor((Math.random()*(max-min+1))) + (min-1);
+			var question = global["numberMapping"][rndQuestion];
+
+			global["currentQuestion"] = question;
+			
+			if (isShowName())
+				showName(question);
+			else
+				showNumber(question);
+		}
+		
+		function playCardGame() {
+			hideNameNumberPanels();
+			showCardPanels();
+			
+			if ($("#rndQuestion")[0].value === "下一題") {
+				drawCardQuestion();			
+				$("#rndQuestion")[0].value = "開估";
+			}
+			else {
+				showCardAnswer();
+				$("#rndQuestion")[0].value = "下一題";
+			}
+		}
+
+		function drawCardQuestion() {
+			var randomCard = pickCard();
+			global["currentCard"] = randomCard;
+			
+			$("#cardPanel")[0].innerHTML = "<embed src=\"img/cards/" + randomCard.poker + "\" type=\"image/svg+xml\" />"
+			$("#cardNamePanel")[0].innerHTML = "";
+			$("#cardNumPanel")[0].innerHTML = "";
+		}
+		
+		function showCardAnswer() {
+			var currentCard = global["currentCard"];
+			
+			$("#cardNamePanel")[0].innerHTML = currentCard.name;
+			$("#cardNumPanel")[0].innerHTML = currentCard.num;
+		}
+
+		function pickCard() {
+			
+			var min = $("#rangeMin")[0].value - 1;
+			var max = $("#rangeMax")[0].value;
+			max = (max > 52) ? 51 : max;
+			
+			var rndCard = Math.floor((Math.random()*(max-min+1))) + (min-1);
+			var cardObjects = global["numberMapping"].filter(
+				function(element, index, array) {
+					return element.poker != null;
+				}
+			);
+			
+			return cardObjects[rndCard];
+		}
+
+		function isCardGameChecked() {
+			return $("#playCard")[0].checked;
+		}
+		
+		function isShowName() {
+			var numChecked = $("#showNum")[0].checked;
+			var nameChecked = $("#showName")[0].checked;
+			
+			if (numChecked && nameChecked) {
+				return (Math.random() > 0.5);
+			}
+			
+			return nameChecked;
+		}
+		
+		function showName(question) {
+			$("#namePanel")[0].innerHTML = question.name;
+			$("#numPanel")[0].innerHTML = "";
+		}
+		
+		function showNumber(question) {
+			$("#numPanel")[0].innerHTML = question.num;
+			$("#namePanel")[0].innerHTML = "";
+		}
+		
+		function showAnswer() {
+			var question = global["currentQuestion"];
+			$("#namePanel")[0].innerHTML = question.name;
+			$("#numPanel")[0].innerHTML = question.num;
+		}
+		
+		function hideNameNumberPanels() {
+			$("#namePanel").hide();
+			$("#numPanel").hide();
+		}
+		
+		function hideCardPanels() {
+			$("#cardPanel").hide();
+			$("#cardNamePanel").hide();
+			$("#cardNumPanel").hide();
+		}
+		
+		function showNameNumberPanels() {
+			$("#namePanel").show();
+			$("#numPanel").show();
+		}
+		
+		function showCardPanels() {
+			$("#cardPanel").show();
+			$("#cardNamePanel").show();
+			$("#cardNumPanel").show();
+		}
+	</script>
+	
+	<title>Memory Exercise</title>
+</head>
+<body>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6"><h1>記憶練習</h1></div>
+		<div class="col-md-6"><a href="table.html">全表</a></div>
+	</div>
+	
+	<form>
+		<div class="form-group">
+			<label>範圍</label>
+			<input class="form-control" id="rangeMin" type="textbox" value="1"> - <input class="form-control" id="rangeMax" type="textbox" value="100">
+		</div>
+		
+		<div class="checkbox">
+			<label>
+				<input id="showNum" type="checkbox" checked="true">數字
+			</label>
+		</div>
+		
+		<div class="checkbox">
+			<label>
+				<input id="showName" type="checkbox" checked="true">名字
+			</label>
+		</div>
+		
+		<div class="checkbox">
+			<label>
+				<input id="playCard" type="checkbox">咭
+			</label>
+		</div>
+		
+		<div class="form-group">
+			<input id="rndQuestion" value="下一題" type="button"></div>
+		</div>
+	</form>
+	
+	<div class="row">
+
+		<div id="numPanel" class="questionPanel col-md-12">
+		</div>
+
+		<div id="namePanel" class="questionPanel col-md-12">
+		</div>
+
+	</div>
+
+	<div class="row">
+	<div id="cardPanel" style="position:absolute; top:-100px; left:-180px; z-index:-1;">
+	</div>
+
+	<div id="cardNamePanel" class="cardQuestionPanel">
+	</div>
+
+	<div id="cardNumPanel" class="cardQuestionPanel">
+	</div>	
+	</div>
+</div>
+
+
+</body>
+</html>
